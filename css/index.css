@@ -1,0 +1,59 @@
+
+h1 {
+   display: flex;
+   flex-direction:row;
+   align-items: center;
+
+
+}
+#jackets-main-page{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-height: auto;
+
+
+}
+
+.product-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: "roboto";
+    border: solid 1px;
+    border-radius: 2%;
+    margin: 10px;
+
+    
+}
+
+.product-img{
+    width: auto;
+    max-height: 350px;
+}
+
+.title{
+
+    align-items: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px 40px;
+    font-size: 20px;
+}
+.price{
+    align-items: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+@media (min-width: 1000px) {
+    #jackets-main-page{
+        flex-direction: row;
+}
+}
