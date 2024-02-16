@@ -1,0 +1,19 @@
+#single-product{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.jacket-image{
+    width: auto;
+    height: 400px;
+}
+.jacket-title{
+    font-size: 20px;
+}
+
+.jacket-description{
+    font-size: 15px;
+
+}
