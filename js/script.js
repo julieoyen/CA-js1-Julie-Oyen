@@ -1,87 +1,115 @@
 const rainyDaysAPI = "https://api.noroff.dev/api/v1/rainy-days";
-const jacketsMain = document.getElementById("jackets-main-page");
-const filterMaleBTN = document.getElementById("filter-male");
-const filterFemaleBTN = document.getElementById("filter-female");
+const jacketListDiv = document.getElementById("jacket-list");
+const genderFilterButton = document.getElementById("btnFilter");
 
-let jackets = [];
+const newArrivals = document.querySelector(".newarrivals");
+const dropdownJacketList = document.getElementById("jacketList");
+
+newArrivals.innerHTML = "New Arrivals";
+
+genderFilterButton.addEventListener("click", filterByGender);
+
+let jacketData = [];
 
 fetch(rainyDaysAPI)
-  .then((response) => response.json())
+  .then((response) => {
+    return response.json();
+  })
   .then((jacketResultData) => {
-    jackets = jacketResultData;
-    for (const jacket of jackets) {
+    jacketData = jacketResultData;
+
+    for (const jacket of jacketData) {
       displayJacket(jacket);
     }
+
+    loadGenderIntoDropDown();
   });
 
-function filterJackets(filterParameter) {
-  fetch(rainyDaysAPI)
-    .then((response) => response.json())
-    .then((jacketResultData) => {
-      jackets = jacketResultData;
+function displayJacket(jacket) {
+  const jacketDiv = document.createElement("div");
+  jacketDiv.classList.add("jacket-container");
 
-      for (let k = 0; k < jackets.length; k++) {
-        let jacketTag = jackets[k].tags;
-        for (let i = 0; i < jacketTag.length; i++) {
-          if (jacketTag.tags === filterParameter && jackets.discountedPrice) {
-            jacketsMain.innerHTML += `
-          <div class="product-card">
-              <p class="title"> ${jackets.title}</p>
-              <img class ="product-img" src="${jackets.image}" alt="A picture of a jacket from Rainy Jacket">
-              <p class="price">Price: ${jackets.price}</p>
-              <p class="gender"> ${jackets.gender}
-              <p> Discounted price: ${jackets.discountedPrice}</p>
-          </div>
-        `;
-          } else if (
-            (jacketTag.tags === filterParameter) !=
-            jackets.discountedPrice
-          ) {
-            jacketsMain.innerHTML += `
-          <div class="product-card">
-              <p class="title"> ${jackets.title}</p>
-              <img class ="product-img" src="${jackets.image}" alt="A picture of a jacket from Rainy Jacket">
-              <p class="price">Price: ${jackets.price}</p>
-              <p class="gender"> ${jackets.gender}
-          </div>
-      `;
-          }
-        }
-      }
-    });
+  const jacketTitlePara = document.createElement("p");
+  jacketTitlePara.classList.add("jacket-title");
+  jacketTitlePara.innerText = jacket.title;
+
+  const jacketPrice = document.createElement("p");
+  jacketPrice.classList.add("jacket-price");
+  jacketPrice.innerText = `Price: ${jacket.price}`;
+
+  const discountedPrice = document.createElement("p");
+
+  if (jacket.onSale) {
+    discountedPrice.classList.add("jacket-discounted-price");
+    discountedPrice.innerText = `Discounted Price: ${jacket.discountedPrice}`;
+    const oldPrice = document.createElement("p");
+    oldPrice.classList.add("old-price");
+    oldPrice.innerText = `Price: ${jacket.price}`;
+  }
+
+  const jacketImg = document.createElement("img");
+  jacketImg.classList.add("jacket-image");
+  jacketImg.src = jacket.image;
+  jacketImg.alt = "a picture of a jacket";
+
+  jacketImg.addEventListener("click", () => {
+    sessionStorage.setItem("selectedJacket", JSON.stringify(jacket));
+    window.location.href = "http://127.0.0.1:3004/product.html";
+  });
+
+  jacketDiv.appendChild(jacketImg);
+  jacketDiv.appendChild(jacketTitlePara);
+  jacketDiv.appendChild(jacketPrice);
+
+  if (discountedPrice.innerText) {
+    jacketDiv.appendChild(discountedPrice);
+  }
+
+  jacketListDiv.appendChild(jacketDiv);
 }
 
-function displayJacket(jacket) {
-  if (jacket.onSale === false) {
-    jacketsMain.innerHTML += `
-          <div class="product-card">
-              <p class="title"> ${jacket.title}</p>
-              <img class ="product-img" src="${jacket.image}" alt="A picture of a jacket from Rainy Jacket">
-              <p class="price">Price: ${jacket.price}</p>
-              <p class="gender"> ${jacket.gender}
-          </div>
-      `;
-  } else {
-    jacketsMain.innerHTML += `
-  <div class="product-card">
-      <p class="title"> ${jacket.title}</p>
-      <img class ="product-img" src="${jacket.image}" alt="A picture of a jacket from Rainy Jacket">
-      <p class="price">Price: ${jacket.price}</p>
-      <p class="gender"> ${jacket.gender}
-      <p> Discounted price: ${jacket.discountedPrice}</p>
-  </div>
-`;
+function loadGenderIntoDropDown() {
+  const allJacketsOption = document.createElement("option");
+  allJacketsOption.value = "all";
+  allJacketsOption.innerText = "View All Jackets";
+
+  const maleOption = document.createElement("option");
+  maleOption.value = "male";
+  maleOption.innerText = "Men";
+
+  const femaleOption = document.createElement("option");
+  femaleOption.value = "female";
+  femaleOption.innerText = "Women";
+
+  dropdownJacketList.appendChild(maleOption);
+  dropdownJacketList.appendChild(femaleOption);
+  dropdownJacketList.appendChild(allJacketsOption);
+}
+
+function filterByGender() {
+  try {
+    const genderToFilterBy = dropdownJacketList.value.toLowerCase();
+
+    if (genderToFilterBy === "") {
+      throw new Error("Bad Filter");
+    }
+
+    let filteredResults = [];
+
+    if (genderToFilterBy === "all") {
+      filteredResults = jacketData;
+    } else {
+      filteredResults = jacketData.filter(
+        (jacket) => jacket.gender.toLowerCase() === genderToFilterBy
+      );
+    }
+
+    jacketListDiv.innerHTML = "";
+
+    for (const jacket of filteredResults) {
+      displayJacket(jacket);
+    }
+  } catch (error) {
+    alert("Please select a gender");
   }
 }
-
-filterFemaleBTN.innerHTML = "Female";
-filterMaleBTN.innerHTML = "Male";
-
-filterFemaleBTN.addEventListener("click", function () {
-  filterJackets("womens");
-});
-
-filterMaleBTN.addEventListener("click", function () {
-  filterJackets("mens");
-});
-// addEventListener filter
