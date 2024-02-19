@@ -27,10 +27,8 @@ function displayJacketDetails(jacket) {
 
   const selectJacketBtn = document.createElement("button");
   selectJacketBtn.addEventListener("click", () => {
-    // Get the current cart from sessionStorage
     let currentCart = sessionStorage.getItem("collectedJackets");
 
-    // Assuming 'jacket' has properties like title, img, price
     let jacketDetails = {
       title: jacket.title,
       image: jacket.image,
@@ -40,13 +38,10 @@ function displayJacketDetails(jacket) {
       onSale: jacket.onSale,
     };
 
-    // Convert the jacket details object to a JSON string
     let jacketDetailsString = JSON.stringify(jacketDetails);
 
-    // Concatenate the updated cart string
     let updateCart = currentCart + `#${jacketDetailsString}`;
 
-    // Update the cart in sessionStorage
     sessionStorage.setItem("collectedJackets", updateCart);
   });
 

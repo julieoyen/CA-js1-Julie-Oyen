@@ -2,12 +2,11 @@ const rainyDaysAPI = "https://api.noroff.dev/api/v1/rainy-days";
 const jacketListDiv = document.getElementById("jacket-list");
 const genderFilterButton = document.getElementById("btnFilter");
 
-const newArrivals = document.querySelector(".newarrivals");
 const dropdownJacketList = document.getElementById("jacketList");
 
-newArrivals.innerHTML = "New Arrivals";
-
-genderFilterButton.addEventListener("click", filterByGender);
+genderFilterButton.addEventListener("click", function () {
+  filterByGender();
+});
 
 let jacketData = [];
 
