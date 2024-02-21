@@ -1,3 +1,9 @@
+main{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
 #single-product{
     display: flex;
     flex-direction: column;
@@ -7,13 +13,34 @@
 
 .jacket-image{
     width: auto;
-    height: 400px;
+    height: 500px;
 }
 .jacket-title{
-    font-size: 20px;
+    font-size: 30px;
+    padding-top: 50px;
+
 }
 
-.jacket-description{
+.jacket-description, .jacket-size{
     font-size: 15px;
+    margin-bottom: 5px;
 
 }
+
+.selectBTN {
+padding: 5px 10px;
+border-radius: 20px;
+cursor: pointer;
+}
+
+.selectBTN:hover{
+    background-color: #233943;
+    color: white;
+
+}
+
+
+.selectBTN{
+    margin: 15px;
+}
+
