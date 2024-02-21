@@ -2,35 +2,49 @@
 <html lang="en">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> Rainy Days | Home</title>
-<meta name="description" content="Home page of RainyDays, a company that specializes in raincoats and jackets">
+<title> Rainy Days | Your Cart</title>
+<meta name="description" content="Your cart at RainyDays">
 <link href="css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="css/checkout.css">
 
 <script src="js/checkout.js" defer></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script src="https://kit.fontawesome.com/94f8d6093f.js" crossorigin="anonymous"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet"></head>
 <body>
-    <header>   
-        <a href="index.html"><img src="images/RainyDays_logo_white.png" alt="RainyDays logo" class="header-logo"></a>  
-      
-        <nav aria-label="Main menu">
-          <ul class="nav-content">
-            <li><a href="index.html" class="nav">Home</a></li>
-            <li><a href="checkout.html" class="nav">Cart</a></li>
-          </ul>
-        </nav>
-      </header>
+  <header>  
+    <button role="button" id="logo-icon" alt="RainyDays logo button that takes you to the homepage">
+    <a href="index.html"><img src="images/RainyDays_logo_white.png" alt="RainyDays logo" class="header-logo"></a>  
+  </button> 
+    <button role="button" id="cart-icon" alt="Cart button">
+    <a aria-label="Go to cart" href="checkout.html" class="cart-label"><i aria-hidden="true" class="fa-solid fa-cart-shopping fa-2x"></i></a>
+</button>
+  </header>
   <main>
-
-
     <h1 id="h1-cart">Your Cart</h1>
-    <ul id="cart"></ul>
+
+    <div class="whole-page">
+   
+    <div id="cart-details">
+      <form class="form" action="/confirmation.html">
+        <h2>Contact information</h2>
+        <label for="email">E-mail:</label>
+        <input type="text" id="email" name="email">
+        <h2>Shipping Address</h2>
+        <label for="firstname">First name:</label>
+        <input type="text" id="firstname" name="firstname">
+        <label for="lastname">Last name:</label>
+        <input type="text" id="lastname" name="lastname">
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address">
+        <label for="pocode">Postal code:</label>
+        <input type="text" id="pocode" name="pocode">
+        <div id="totalprice-container"></div>
+      </form> 
+      <button id="submitbtn"></button>
+    </div>
+   <div id="cart"></div>
+  </div>
   </main>
 </body>
 
