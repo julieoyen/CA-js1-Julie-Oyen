@@ -1,14 +1,13 @@
-const rainyDaysAPI = "https://api.noroff.dev/api/v1/rainy-days";
 const selectedJacket = JSON.parse(sessionStorage.getItem("selectedJacket"));
 const jacketListDiv = document.getElementById("single-product");
 
-displayJacketDetails(selectedJacket);
-
 function displayJacketDetails(jacket) {
   const jacketDiv = document.createElement("div");
+
   const jacketTitle = document.createElement("p");
   jacketTitle.innerText = selectedJacket.title;
   jacketTitle.classList.add("jacket-title");
+
   const jacketImg = document.createElement("img");
   jacketImg.src = selectedJacket.image;
   jacketImg.alt = "a picture of a jacket";
@@ -19,17 +18,29 @@ function displayJacketDetails(jacket) {
   jacketDescription.classList.add("jacket-description");
 
   const jacketSize = document.createElement("p");
-  jacketSize.innerText = selectedJacket.sizes;
+  jacketSize.innerText = `Available sizes: ${selectedJacket.sizes}`;
   jacketSize.classList.add("jacket-size");
 
   const jacketGender = document.createElement("p");
   jacketGender.innerText = selectedJacket.gender;
 
+  const jacketPrice = document.createElement("p");
+  jacketPrice.innerText = selectedJacket.price;
+  jacketPrice.classList.add("jacket-price");
+
+  const discountedPrice = document.createElement("p");
+  discountedPrice.classList.add("discounted-price");
+
+  const oldPrice = document.createElement("p");
+  oldPrice.classList.add("oldPrice");
+
   const selectJacketBtn = document.createElement("button");
+  selectJacketBtn.classList.add("selectBTN");
   selectJacketBtn.addEventListener("click", () => {
     let currentCart = sessionStorage.getItem("collectedJackets");
 
     let jacketDetails = {
+      id: jacket.id,
       title: jacket.title,
       image: jacket.image,
       price: jacket.price,
@@ -52,6 +63,27 @@ function displayJacketDetails(jacket) {
   jacketDiv.appendChild(jacketDescription);
   jacketDiv.appendChild(jacketSize);
   jacketDiv.appendChild(jacketGender);
+  if (jacket.onSale !== true) {
+    jacketPrice.innerText = ` $${jacket.price}`;
+    jacketDiv.appendChild(jacketPrice);
+  } else {
+    discountedPrice.innerText = `Discounted price: $${jacket.discountedPrice}`;
+    oldPrice.innerText = `$${jacket.price}`;
+    jacketDiv.appendChild(oldPrice);
+    jacketDiv.appendChild(discountedPrice);
+  }
   jacketDiv.appendChild(selectJacketBtn);
   jacketListDiv.appendChild(jacketDiv);
+}
+
+displayJacketDetails(selectedJacket);
+
+function addToCart(product) {
+  const existingProduct = cart.find((item) => item.id === product.id);
+  if (existingProduct) {
+    existingProduct.quantity += 1;
+  } else {
+    cart.push({ ...product, quantity: 1 });
+  }
+  renderCart();
 }
