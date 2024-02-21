@@ -1,5 +1,27 @@
+header{
+    display: flex;
+    justify-content: space-between;
+   
+
+}
+
+#cart-icon{
+background-color: #0a3641;
+border-style: none;
+box-shadow: none;
+}
+
+#logo-icon{
+    background-color: #0a3641;
+    border-style: none;
+    box-shadow: none;
+    }
+
+
 .jacket-div{
-    margin: 50px 50px;
+    margin: 50px 15px;
+    padding: 50px;
+    border-bottom: 1px black solid ;
  
 }
 
@@ -7,3 +29,61 @@
     width: auto;
     height: 200px;
 }
+
+#totalprice-container{
+margin: 20px 0px 20px 0px;
+border: 1px solid;
+padding: 10px 15px;
+}
+
+.whole-page{
+    display: flex;
+}
+#submitbtn{
+padding: 5px 10px;
+border-radius: 20px;
+cursor: pointer;
+}
+
+#submitbtn:hover{
+    background-color: #233943;
+    color: white;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+}
+
+#cart-details{
+    margin: 40px;
+    padding: 20px 50px 20px 2px;
+    border-right: 1px solid black;
+}
+
+.empty-cart{
+
+    margin: 50px;
+    font-size: 25px;
+}
+
+#cart-details h2{
+    margin: 60px 15px 15px 15px;
+}
+
+.delete-btn{
+    margin-top: 10px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.delete-btn:hover{
+    background-color: #233943;
+    color: white;
+}
+
+.jacket-title{
+    padding-bottom: 50px;
+}
+
