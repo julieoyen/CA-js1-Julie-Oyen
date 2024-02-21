@@ -23,7 +23,7 @@
 
   header {
     background-color: #0a3641;
-    padding-bottom: 2px;
+    padding: 20px 10px;
   }
   
   .header-logo {
@@ -47,51 +47,51 @@
     display: block;
   }
   
-  nav,
-  #hamburger-menu {
-    display: none;
-  }
-  
-  #hamburger-menu:checked~nav {
-    display: block;
-  }
-  
-  .nav-content {
-    display: block;
-    padding: 20px;
-    background: white;
-    text-align: center;
-    z-index: 1;
-    position: absolute;
-    right: 0;
-  }
-  .sr-only{
-    display: none;
-  }
-  .cart-label,
-  .hamburger-label {
+  #cart-icon{
+    background-color: #0a3641;
+    border-style: none;
+    box-shadow: none;
+    cursor: pointer;
     float: right;
     color: white;
-    padding: 20px;
+    padding: 10px;
     display: flex;
     gap: 10px;
-  }
-  
-  .cart-label,
-  .hamburger-label:hover {
     cursor: pointer;
-  }
-  
-  
-  .cart-label{
+
+    }
+     .cart-label{
     text-decoration: none;
     color: white;
+    padding-right: 10px;
+
    
   }
-  .discounted{
-    color: red;
-  }
+    #logo-icon{
+        background-color: #0a3641;
+        border-style: none;
+        box-shadow: none;
+        cursor: pointer;
+        }
 
+ 
+
+
+  .jacket-price{
+    font-size: 20px;
+    padding-top: 10px;
+}
+
+.discounted-price{
+    color: red;
+    font-size: 20px;
+}
+
+.oldPrice{
+    text-decoration: line-through;
+    margin-top: 10px;
+    font-size:  20px;
+}
 
   
 

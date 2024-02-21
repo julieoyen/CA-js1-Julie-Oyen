@@ -1,8 +1,9 @@
 const rainyDaysAPI = "https://api.noroff.dev/api/v1/rainy-days";
 const jacketListDiv = document.getElementById("jacket-list");
 const genderFilterButton = document.getElementById("btnFilter");
-
+const loadingDiv = document.getElementById("loader");
 const dropdownJacketList = document.getElementById("jacketList");
+const header1 = document.getElementsByClassName("newarrivals");
 
 genderFilterButton.addEventListener("click", function () {
   filterByGender();
@@ -12,6 +13,9 @@ let jacketData = [];
 
 fetch(rainyDaysAPI)
   .then((response) => {
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
     return response.json();
   })
   .then((jacketResultData) => {
@@ -22,6 +26,10 @@ fetch(rainyDaysAPI)
     }
 
     loadGenderIntoDropDown();
+    loadingDiv.style.display = "none";
+  })
+  .catch((error) => {
+    console.error(error.message);
   });
 
 function displayJacket(jacket) {
@@ -31,20 +39,28 @@ function displayJacket(jacket) {
   const jacketTitlePara = document.createElement("p");
   jacketTitlePara.classList.add("jacket-title");
   jacketTitlePara.innerText = jacket.title;
+  jacketTitlePara.addEventListener("click", () => {
+    sessionStorage.setItem("selectedJacket", JSON.stringify(jacket));
+    window.location.href = "product.html";
+  });
+
+  const jacketQuantity = document.createElement("p");
+  jacketQuantity.classList.add("jacket-quantity");
+  jacketQuantity.innerText = `Quantity: ${jacket.quantity}`;
 
   const jacketPrice = document.createElement("p");
   jacketPrice.classList.add("jacket-price");
   jacketPrice.innerText = `Price: ${jacket.price}`;
+  jacketPrice.addEventListener("click", () => {
+    sessionStorage.setItem("selectedJacket", JSON.stringify(jacket));
+    window.location.href = "product.html";
+  });
 
   const discountedPrice = document.createElement("p");
+  discountedPrice.classList.add("discounted-price");
 
-  if (jacket.onSale) {
-    discountedPrice.classList.add("jacket-discounted-price");
-    discountedPrice.innerText = `Discounted Price: ${jacket.discountedPrice}`;
-    const oldPrice = document.createElement("p");
-    oldPrice.classList.add("old-price");
-    oldPrice.innerText = `Price: ${jacket.price}`;
-  }
+  const oldPrice = document.createElement("p");
+  oldPrice.classList.add("oldPrice");
 
   const jacketImg = document.createElement("img");
   jacketImg.classList.add("jacket-image");
@@ -53,14 +69,19 @@ function displayJacket(jacket) {
 
   jacketImg.addEventListener("click", () => {
     sessionStorage.setItem("selectedJacket", JSON.stringify(jacket));
-    window.location.href = "http://127.0.0.1:3004/product.html";
+    window.location.href = "product.html";
   });
 
   jacketDiv.appendChild(jacketImg);
   jacketDiv.appendChild(jacketTitlePara);
-  jacketDiv.appendChild(jacketPrice);
 
-  if (discountedPrice.innerText) {
+  if (jacket.onSale !== true) {
+    jacketPrice.innerText = ` $${jacket.price}`;
+    jacketDiv.appendChild(jacketPrice);
+  } else {
+    discountedPrice.innerText = `Discounted price: $${jacket.discountedPrice}`;
+    oldPrice.innerText = `$${jacket.price}`;
+    jacketDiv.appendChild(oldPrice);
     jacketDiv.appendChild(discountedPrice);
   }
 
@@ -89,7 +110,7 @@ function filterByGender() {
   try {
     const genderToFilterBy = dropdownJacketList.value.toLowerCase();
 
-    if (genderToFilterBy === "") {
+    if (genderToFilterBy === "default") {
       throw new Error("Bad Filter");
     }
 

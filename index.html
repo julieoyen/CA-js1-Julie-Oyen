@@ -9,22 +9,19 @@
 <script src="js/script.js" defer type="module"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script src="https://kit.fontawesome.com/94f8d6093f.js" crossorigin="anonymous"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet"></head>
 <body>
-    <header>   
-        <a href="index.html"><img src="images/RainyDays_logo_white.png" alt="RainyDays logo" class="header-logo"></a>  
-      
-        <a aria-label="Go to cart" href="checkout.html" class="cart-label"><i aria-hidden="true" class="fa-solid fa-cart-shopping"></i></a>
-      
-
-      </header>
+  <header>  
+    <button role="button" id="logo-icon" alt="RainyDays logo button that takes you to the homepage">
+    <a href="index.html"><img src="images/RainyDays_logo_white.png" alt="RainyDays logo" class="header-logo"></a>  
+  </button> 
+    <button role="button" id="cart-icon" alt="Cart button">
+    <a aria-label="Go to cart" href="checkout.html" class="cart-label"><i aria-hidden="true" class="fa-solid fa-cart-shopping fa-2x"></i></a>
+</button>
+  </header>
   <main>
 
-    <h1 class="newarrivals"></h1>
+    <h1>New Arrivals</h1>
     <div class="filter-container">
     
     <select id="jacketList">
@@ -34,7 +31,9 @@
   </div>
     <div id="jacket-list"></div>
 
-
+    <div id="loader">
+      <h3>loading...</h3>
+    </div> 
 
 
 
