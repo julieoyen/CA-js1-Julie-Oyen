@@ -3,8 +3,8 @@
   font-size: 20px;
 }
 .jacket-image {
-  width: auto;
-  height: 500px;
+  max-width: auto;
+  height: 400px;
 }
 
 #jacket-list{
@@ -37,6 +37,7 @@
 
 
   }
+
 #loader{
   margin: 30px 50px;
 }
@@ -53,6 +54,11 @@
 @media (min-width: 1000px) {
     #jackets-main-page{
         flex-direction: row;
+}
+
+.jacket-image {
+  max-width: auto;
+  height: 600px;
 }
 }
 
