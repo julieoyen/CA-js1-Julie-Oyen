@@ -137,6 +137,7 @@ if (currentCollection) {
   submitBTN.innerText = "Place Order";
 
   submitBTN.addEventListener("click", () => {
+    sessionStorage.setItem("orderPlaced", "true");
     window.location.href = "confirmation.html";
     sessionStorage.clear();
   });
@@ -145,5 +146,4 @@ if (currentCollection) {
   document.body.appendChild(emptyCartMessage);
   cartDetails.style.display = "none";
   totalContainer.style.display = "none";
-  console.log("No items in the cart");
 }
