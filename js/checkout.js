@@ -5,7 +5,6 @@ const cartDetails = document.getElementById("cart-details");
 const submitBTN = document.getElementById("submitbtn");
 const wholePage = document.getElementsByClassName("whole-page");
 const emptyCartMessage = document.createElement("p");
-
 emptyCartMessage.classList.add("empty-cart");
 
 if (currentCollection) {

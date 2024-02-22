@@ -45,12 +45,8 @@
 #btnFilter{
   padding: 5px 10px;
   cursor: pointer;
-  b: orange;
 }
 
-#btnFilter:hover{
-  background-color:lightgray;
-}
 @media (min-width: 1000px) {
     #jackets-main-page{
         flex-direction: row;
