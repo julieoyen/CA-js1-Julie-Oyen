@@ -1,6 +1,7 @@
 const currentCollection = sessionStorage.getItem("collectedJackets");
 const cart = document.getElementById("cart");
 const totalContainer = document.getElementById("totalprice-container");
+const finalPrice = document.getElementById("finalprice");
 const cartDetails = document.getElementById("cart-details");
 const submitBTN = document.getElementById("submitbtn");
 const wholePage = document.getElementsByClassName("whole-page");
@@ -77,8 +78,6 @@ if (currentCollection) {
       removeJacket(itemToRemove);
 
       updateTotalDisplay();
-
-      console.log("Item removed successfully");
     }
   }
 
@@ -86,19 +85,17 @@ if (currentCollection) {
     const currentCollection = sessionStorage.getItem("collectedJackets");
 
     if (!cartDetails) {
-      console.log("Error: Element with class 'cartdetails' not found.");
       return;
     }
 
     const isMessageAdded = cart.contains(emptyCartMessage);
 
     if (!currentCollection) {
-      console.log("No items in the cart");
-
       emptyCartMessage.innerText = "Your cart is empty.";
 
       cartDetails.style.display = "none";
       totalContainer.style.display = "none";
+      finalPrice.style.display = "none";
 
       if (!isMessageAdded) {
         cart.appendChild(emptyCartMessage);
@@ -107,6 +104,7 @@ if (currentCollection) {
       return;
     } else {
       totalContainer.style.display = "block";
+      finalPrice.style.display = "block";
       cartDetails.style.display = "block";
 
       if (isMessageAdded) {
@@ -130,6 +128,7 @@ if (currentCollection) {
     }, 0);
 
     totalContainer.innerText = `Total Price: $${total.toFixed(2)}`;
+    finalPrice.innerText = `Your total is: $${total.toFixed(2)}`;
   }
 
   updateTotalDisplay();
@@ -137,7 +136,6 @@ if (currentCollection) {
   submitBTN.innerText = "Place Order";
 
   submitBTN.addEventListener("click", () => {
-    sessionStorage.setItem("orderPlaced", "true");
     window.location.href = "confirmation.html";
     sessionStorage.clear();
   });

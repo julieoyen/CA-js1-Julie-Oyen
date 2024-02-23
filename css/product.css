@@ -12,19 +12,25 @@ main{
 }
 
 .jacket-image{
-    width: auto;
-    height: 500px;
+    width: 300px;
+    height: auto;
 }
 .jacket-title{
     font-size: 30px;
     padding-top: 50px;
+    padding-bottom: 20px;
 
 }
 
-.jacket-description, .jacket-size{
+.jacket-description, 
+.jacket-size{
     font-size: 15px;
     margin-bottom: 5px;
 
+}
+
+.jacket-price{
+    font-size: 25px;
 }
 
 .selectBTN {
@@ -44,3 +50,30 @@ cursor: pointer;
     margin: 15px;
 }
 
+@media (min-width: 1000px) {
+
+.jacket-image {
+  min-width: 500px;
+  height: auto;
+}
+
+.jacket-description, 
+.jacket-size, 
+.jacket-gender{
+    font-size: 20px;
+    margin-bottom: 5px;
+
+}
+
+.jacket-price,
+.discounted-price{
+    font-size: 30px;
+}
+
+.selectBTN {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 15px;
+    cursor: pointer;
+    }
+}

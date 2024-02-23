@@ -23,6 +23,7 @@ function displayJacketDetails(jacket) {
 
   const jacketGender = document.createElement("p");
   jacketGender.innerText = selectedJacket.gender;
+  jacketGender.classList.add("jacket-gender");
 
   const jacketPrice = document.createElement("p");
   jacketPrice.innerText = selectedJacket.price;

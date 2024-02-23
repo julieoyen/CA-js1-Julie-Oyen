@@ -11,6 +11,8 @@ genderFilterButton.addEventListener("click", function () {
 
 let jacketData = [];
 
+loadingDiv.style.display = "block";
+
 fetch(rainyDaysAPI)
   .then((response) => {
     if (!response.ok) {
@@ -29,7 +31,9 @@ fetch(rainyDaysAPI)
     loadingDiv.style.display = "none";
   })
   .catch((error) => {
-    console.error(error.message);
+    console.error(`Fetch operation failed: ${error.message}`);
+    loadingDiv.style.display = "none"; //
+    jacketListDiv.innerHTML = "<p>Error fetching data. Please try again.</p>";
   });
 
 function displayJacket(jacket) {
