@@ -1,8 +1,6 @@
 header{
     display: flex;
     justify-content: space-between;
-   
-
 }
 
 #cart-icon{
@@ -30,6 +28,16 @@ box-shadow: none;
     height: 200px;
 }
 
+#finalprice{
+    padding-top: 30px;
+    font-size: 30px;
+}
+#totalh1{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
 #totalprice-container{
 margin: 20px 0px 20px 0px;
 border: 1px solid;
@@ -40,6 +48,7 @@ font-weight: bolder;
 
 .whole-page{
     display: flex;
+    flex-direction: column;
 }
 #submitbtn{
 padding: 5px 10px;
@@ -60,7 +69,6 @@ cursor: pointer;
 #cart-details{
     margin: 40px;
     padding: 20px 50px 20px 2px;
-    border-right: 1px solid black;
 }
 
 .empty-cart{
@@ -87,5 +95,33 @@ cursor: pointer;
 
 .jacket-title{
     padding-bottom: 50px;
+}
+
+@media (min-width: 1000px) {
+
+#submitbtn{
+font-size: 20px;
+margin-top: 10px;
+margin-left: 100px;
+}
+
+.whole-page{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.form{
+    border-left: 1px solid black;
+    padding-left: 100px;
+    margin-right: 200px;
+
+}
+
+.jacket-div{
+margin-left: 300px;
+padding: 20px 100px;
+}
+
 }
 
